@@ -1,20 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToUserMenu()">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-icon name="qr-code-outline" style="zoom:4.0;"></ion-icon><p></p>
+    <strong>Escaneá con tu cámara</strong>
+      <p>los códigos QR de los paquetes.</p>
   </div>
+  
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+      <ion-button expand='block' margin (click)="goToBarcodeScan()">Empezar a escanear</ion-button>
+  </ion-toolbar>
+</ion-footer>
