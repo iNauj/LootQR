@@ -13,6 +13,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { environment } from './../environments/environment';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [
     StatusBar,
