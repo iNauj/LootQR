@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -16,7 +17,7 @@ import * as firebase from 'firebase/app'
 export class LoginPage implements OnInit {
   user: User = new User();
   items: Observable <any[]>;
-  constructor(db: AngularFirestore, public afAuth: AngularFireAuth, private router: Router, private authSvc: AuthService) {
+  constructor(db: AngularFirestore, public afAuth: AngularFireAuth, private router: Router, private authSvc: AuthService, public toastCtrl: ToastController) {
     this.items = db.collection('items').valueChanges();
   }
 
@@ -24,11 +25,19 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  async presentToast(error) {
+    const toast = await this.toastCtrl.create({
+      message: error,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   async onLogin(){
 const user = await this.authSvc.onLogin(this.user);
 if(user){
   console.log('Successfully logged in!');
+  
   this.router.navigateByUrl('/home');
 }
   }

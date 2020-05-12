@@ -21,9 +21,10 @@ export class HomePage {
     var user = this.afAuth.auth.currentUser; {
       if (user) {
        
-        var name, email, photoUrl, uid, emailVerified;
+        var name, email, photoUrl, uid, credential, emailVerified;
         
         if (user != null) {
+          credential = user.refreshToken;
           name = user.displayName;
           email = user.email;
           photoUrl = user.photoURL;
@@ -32,6 +33,7 @@ export class HomePage {
                            // this value to authenticate with your backend server, if
                            // you have one. Use User.getToken() instead.
         }
+        console.log(credential);
         console.log(name);
         console.log(email)
         console.log(photoUrl);

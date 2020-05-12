@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app'
+import * as firebase from 'firebase/app';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +13,7 @@ import * as firebase from 'firebase/app'
 })
 export class MenuPage implements OnInit {
 
-  constructor(private router: Router, private authSvc: AuthService, private afAuth: AngularFireAuth) { }
+  constructor(private router: Router, private authSvc: AuthService, private afAuth: AngularFireAuth, public toastCtrl: ToastController) { }
   
 
   ngOnInit() {
@@ -19,14 +21,30 @@ export class MenuPage implements OnInit {
   
   }
 
-  goToLoginGoogle(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-   
+  async presentToast(error) {
+    const toast = await this.toastCtrl.create({
+      message: error,
+      duration: 2000
+    });
+    toast.present();
   }
 
-  goToLoginFacebook(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  onGoogleLogin(){
+    try {
+      this.authSvc.loginGoogle();
+    } catch (error) {
+      console.log(error);
+      this.presentToast(error);
+    }
     
+  }
+
+  onFacebookLogin(){
+    try {
+      this.authSvc.loginFacebook();
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   goToLogout(){
@@ -36,6 +54,7 @@ export class MenuPage implements OnInit {
   }
 
   goToLogin(){
+    
     this.router.navigateByUrl('/login');
   }
 
