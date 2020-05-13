@@ -15,6 +15,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    GooglePlus,
+    Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
