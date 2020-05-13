@@ -8,13 +8,15 @@
 
 <ion-content>
   <div id="container">
-    <div *ngIf="afAuth.authState | async as user; else imagePhoto">
-      <img [src]="user.photoURL" width="70px" />
+    <div *ngIf="afAuth.authState | async as user else imagePhoto">
+      
+        <img [src]="user.photoURL" width="90px" />
+ 
     </div>
+    
     <div *ngIf="afAuth.authState | async as user; else showLogin">
       <h1>{{ user.displayName }}</h1>
-      
-      <button (click)="goToLogout()">Logout</button>
+      <button (click)="goToLogout()">Cerrar sesión</button>
     </div>
   
   <ion-list>

@@ -28,10 +28,15 @@ export class AuthService {
   //Registro
 
   async onRegister(user:User){
+    
 try{
   return await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-}catch(error){
-  console.log('Error on register', error);
+  
 }
+catch(error){
+  console.log('Error on register', error.message);
+}
+
+
   }
 }

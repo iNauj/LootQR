@@ -44,6 +44,7 @@ export class MenuPage implements OnInit {
     this.picture = user.photoURL;
     this.name = user.displayName;
     this.email = user.email;
+    this.router.navigateByUrl('/home');
   }
 
   async loginGoogleWeb(){
@@ -53,8 +54,10 @@ export class MenuPage implements OnInit {
     this.picture = user.photoURL;
     this.name = user.displayName;
     this.email = user.email;
+    this.router.navigateByUrl('/home');
    
   }
+  
   goToLoginFacebook(){
 
   if (this.platform.is('android')) {
@@ -77,6 +80,7 @@ export class MenuPage implements OnInit {
     this.picture = user.photoURL;
     this.name = user.displayName;
     this.email = user.email;
+    this.router.navigateByUrl('/home');
 
   }
 
@@ -88,6 +92,7 @@ export class MenuPage implements OnInit {
     this.picture = user.photoURL;
     this.name = user.displayName;
     this.email = user.email;
+    this.router.navigateByUrl('/home');
 
   }
   

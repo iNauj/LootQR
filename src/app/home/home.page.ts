@@ -20,24 +20,7 @@ export class HomePage {
     
     var user = this.afAuth.auth.currentUser; {
       if (user) {
-       
-        var name, email, photoUrl, uid, emailVerified;
-        
-        if (user != null) {
-          name = user.displayName;
-          email = user.email;
-          photoUrl = user.photoURL;
-          emailVerified = user.emailVerified;
-          uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                           // this value to authenticate with your backend server, if
-                           // you have one. Use User.getToken() instead.
-        }
-        console.log(name);
-        console.log(email)
-        console.log(photoUrl);
-        console.log(emailVerified);
-        console.log(uid);
-        ;
+
        this.goToBarcodeScan();
       } else {
         // No user is signed in.
@@ -60,13 +43,14 @@ export class HomePage {
     };
 
     this.barcodeCtrl.scan(options).then(barcodeData => {
+      
+      barcodeData = this.scannedData;
       console.log('Barcode data', barcodeData);
-      this.scannedData = barcodeData;
+      console.log('Barcode data:::::::' + barcodeData);
 
     }).catch(err => {
       console.log('Error', err);
     });
-
   }
 
 

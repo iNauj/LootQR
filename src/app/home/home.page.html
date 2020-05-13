@@ -14,6 +14,14 @@
     <ion-icon name="qr-code-outline" style="zoom:4.0;"></ion-icon><p></p>
     <strong>Escaneá con tu cámara</strong>
       <p>los códigos QR de los paquetes.</p>
+      <div *ngIf="scannedData">
+        <p>
+          Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+        </p>
+        <p>
+          Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+        </p>
+      </div>
   </div>
   
 </ion-content>
