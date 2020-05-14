@@ -42,11 +42,9 @@ export class HomePage {
       orientation: 'portrait',
     };
 
-    this.barcodeCtrl.scan(options).then(barcodeData => {
-      
-      barcodeData = this.scannedData;
-      console.log('Barcode data', barcodeData);
-      console.log('Barcode data:::::::' + barcodeData);
+      this.barcodeCtrl.scan(options).then(barcodeData => {
+        console.log('Qr Escaneado', barcodeData.text);
+        this.scannedData = barcodeData;
 
     }).catch(err => {
       console.log('Error', err);
