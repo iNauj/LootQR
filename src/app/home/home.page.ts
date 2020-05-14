@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ToastController } from '@ionic/angular';
+
 
 
 @Component({
@@ -14,7 +16,10 @@ export class HomePage {
   encodedData: '';
   encodeData: any;
   user: any;
-  constructor(public barcodeCtrl: BarcodeScanner, private router: Router, private afAuth: AngularFireAuth) { }
+  msg;
+  num: string;
+  
+  constructor(public barcodeCtrl: BarcodeScanner, private router: Router, private afAuth: AngularFireAuth, private toastCtrl: ToastController) { }
 
   goToChecks(){
     
@@ -29,30 +34,46 @@ export class HomePage {
       }
     };
   }
+  
+  async showLongToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 1500,
+    });
+    toast.present();
+  }
 
-    goToBarcodeScan() { 
+  goToBarcodeScan() { 
+      
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: false,
       showTorchButton: true,
       torchOn: false,
       prompt: 'Por favor apunte al QR.',
-      resultDisplayDuration: 500,
+      resultDisplayDuration: 0,
       formats: 'QR_CODE,PDF_417 ',
       orientation: 'portrait',
     };
 
-      this.barcodeCtrl.scan(options).then(barcodeData => {
-        console.log('Qr Escaneado', barcodeData.text);
-        this.scannedData = barcodeData;
+    this.barcodeCtrl.scan(options)
+    
+    .then(barcodeData => {
 
-    }).catch(err => {
-      console.log('Error', err);
+      console.log('Qr Escaneado', barcodeData.text);
+      this.scannedData = barcodeData;
+      var msg = barcodeData.text;
+      console.log(msg);
+      this.showLongToast('Paquete añadido correctamente.');
+    })
+
+    .catch(msg => {
+      console.log('Error', msg);
+      this.showLongToast(msg);
     });
   }
 
-
   goToUserMenu() {
     this.router.navigateByUrl('/menu');
-    }
+  }
 }
